@@ -5,6 +5,8 @@ import streamlit as st
 from datetime import datetime, timedelta
 import numpy as np
 from plotly.subplots import make_subplots
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
 st.set_page_config(
     page_title="Tesla Stock Analytics Dashboard",
@@ -399,10 +401,55 @@ fig_dist.add_trace(go.Violin(y=filtered_df['Close'], box_visible=True,
                             meanline_visible=True))
 fig_dist.update_layout(title='Price Distribution', template='plotly_dark')
 st.plotly_chart(fig_dist, use_container_width=True)
+
+
+def predict_future_prices(df, days_ahead=5):
+    # Use 'Close' price as feature and target
+    df['Day'] = np.arange(len(df))
+    X = df[['Day']]
+    y = df['Close']
+    
+    # Train/Test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    
+    # Train the model
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    
+    # Predict future prices
+    future_days = np.array(range(len(df), len(df) + days_ahead)).reshape(-1, 1)
+    future_predictions = model.predict(future_days)
+    
+    return future_predictions
+
+st.subheader('Future Price Prediction')
+st.markdown("Predict future closing prices for Tesla stock using a simple linear regression model.")
+
+days_ahead = st.slider("Days ahead to predict", min_value=1, max_value=30, value=5)
+
+future_predictions = predict_future_prices(df, days_ahead=days_ahead)
+future_dates = pd.date_range(df.index.max() + timedelta(1), periods=days_ahead)
+
+fig_pred = go.Figure()
+fig_pred.add_trace(go.Scatter(x=df.index, y=df['Close'], name='Actual Prices', line=dict(color='blue')))
+fig_pred.add_trace(go.Scatter(x=future_dates, y=future_predictions, name='Predicted Prices', line=dict(color='red', dash='dash')))
+fig_pred.update_layout(title='Future Price Prediction', template='plotly_dark', xaxis_title='Date', yaxis_title='Price (USD)')
+
+st.plotly_chart(fig_pred, use_container_width=True)
+
+
+
+
+
+
 st.markdown('---')
+
+
+
 st.markdown("""
     <div style='text-align: center; padding: 20px;'>
         <h4>Created by Subhan Ali</h4>
         <p>Advanced Technical Analysis Dashboard for Tesla Stock</p>
     </div>
 """, unsafe_allow_html=True)
+
