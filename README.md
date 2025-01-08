@@ -20,7 +20,6 @@ An interactive and insightful dashboard to explore, analyze, and predict Tesla's
 - **Streamlit**: Fast and easy web app framework for Python
 - **Plotly**: Rich, interactive visualizations
 - **Pandas & NumPy**: Data manipulation and analysis
-- **TA-Lib**: Calculating technical analysis indicators
 - **Python**: The backbone of this project
 
 ## 📈 Visualizations
@@ -41,8 +40,7 @@ Ensure you have the following installed:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/tesla-stock-dashboard.git
-cd tesla-stock-dashboard
+git clone https://github.com/codebysubhan/Data-Analysis-Project.git
 ```
 
 2. Install dependencies:
@@ -52,23 +50,23 @@ pip install -r requirements.txt
 
 3. Run the Streamlit app:
 ```bash
-streamlit run app.py
+streamlit run file.py
 ```
 
 ## 📂 Project Structure
 
 ```
 📦 tesla-stock-dashboard
- ┣ 📂 data
- ┃ ┗ 📜 tesla_stock_prices.csv
- ┣ 📜 app.py
+ ┣ 📜 TSLA.csv
+ ┣ 📜 analysis.ipynb
+ ┣ 📜 file.py
  ┣ 📜 requirements.txt
  ┗ 📜 README.md
 ```
 
 ## ✨ Customization
 
-- **Indicators**: Modify the `app.py` to add or remove technical indicators
+- **Indicators**: Modify the `file.py` to add or remove technical indicators
 - **Visualization Style**: Customize Plotly visualizations to match your preferences
 
 ## 🤝 Contribution
@@ -88,5 +86,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 For any inquiries or feedback, feel free to reach out:
 
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourusername)
-- GitHub: [Your GitHub](https://github.com/yourusername)
+- LinkedIn: [Subhan Ali](https://www.linkedin.com/in/itssubhanali/)
+- GitHub: [Codebysubhan](https://github.com/codebysubhan)
